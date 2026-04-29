@@ -1,9 +1,20 @@
-from app import create_app, db
+from flask import Flask
+from models import db
+import os
 
-app = create_app()
+app = Flask(__name__)
+
+# Configuração do Banco de Dados SQLite
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'projeto.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Inicializa o banco de dados no app
+db.init_app(app)
+
+@app.route('/')
+def index():
+    return "Sistema de Tickets Online"
 
 if __name__ == '__main__':
-    with app.app_context():
-        # Cria as tabelas no banco de dados se não existirem
-        db.create_all()
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
