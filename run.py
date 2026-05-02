@@ -20,8 +20,14 @@ def index():
     return render_template('login.html')
 
 # Rota que processa os dados enviados pelo formulário de login
-@app.route('/login', methods=['POST'])
+
+
+@app.route('/', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':    # Precisa de 4 espaços (ou 1 Tab) aqui
+            return "Sucesso Aula 07!"       # Precisa de 8 espaços (ou 2 Tabs) aqui
+    return render_template('login.html')        # Precisa de 4 espaços aqui
+
     # Pega as informações que o usuário digitou
     email = request.form.get('email')
     senha = request.form.get('senha')

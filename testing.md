@@ -31,6 +31,28 @@ Para executar os testes, utilize o comando:
 *   **Descrição:** Verificação da renderização da tela de login.
 *   **Resultado:** Sucesso. O servidor Flask carregou o template `login.html` corretamente em `http://127.0.0.1:5000`.
 
+# Relatório de Testes - Aula 07
+
+### 1. Teste de Interface Local
+* **Data:** 30/04/2026
+* **Descrição:** Verificação da renderização da tela de login e acesso ao servidor Flask.
+* **Resultado:** Sucesso. O servidor carregou o template `login.html` corretamente em `http://127.0.0.1:5000`.
+
+### 2. Teste de Comunicação de Dados (Método POST)
+* **Data:** 01/05/2026
+* **Descrição:** Verificação do envio de formulário de login e resposta do servidor.
+* **Resultado:** Sucesso. O servidor foi configurado para aceitar requisições POST e retornou a confirmação "Sucesso Aula 07!".
+* **Evidência Técnica (Logs do Servidor):**
+    ```text
+    127.0.0.1 - - [01/May/2026 22:47:14] "GET / HTTP/1.1" 200 -
+    127.0.0.1 - - [01/May/2026 22:47:21] "POST / HTTP/1.1" 200 -
+    ```
+* **Observações:** O erro inicial "405 Method Not Allowed" foi corrigido com a atualização da rota no arquivo `run.py`, permitindo a integração completa entre o frontend e o backend.
+
+### 3. Verificação de Ambiente
+* **Ambiente Virtual (venv):** Ativo e funcional.
+* **Modo Debug:** Ativo (Debugger PIN: 212-646-667).
+
 ### Correções Realizadas
 1.  **Ativação do Ambiente:** Foi necessário ativar o `venv` para carregar o módulo Flask.
 2.  **Estrutura de Pastas:** O arquivo `login.html` foi movido para a pasta `/templates` para que o Jinja2 pudesse localizá-lo.
