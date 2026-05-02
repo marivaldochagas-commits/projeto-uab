@@ -23,3 +23,14 @@ O foco será a validação de cenários críticos e a prevenção de regressões
 ## 3. Configuração do Ambiente de Testes
 Para executar os testes, utilize o comando:
 `pytest --verbose`
+
+## Registro de Testes - Aula 07
+
+### Teste de Interface Local
+*   **Data:** 30/04/2026
+*   **Descrição:** Verificação da renderização da tela de login.
+*   **Resultado:** Sucesso. O servidor Flask carregou o template `login.html` corretamente em `http://127.0.0.1:5000`.
+
+### Correções Realizadas
+1.  **Ativação do Ambiente:** Foi necessário ativar o `venv` para carregar o módulo Flask.
+2.  **Estrutura de Pastas:** O arquivo `login.html` foi movido para a pasta `/templates` para que o Jinja2 pudesse localizá-lo.
