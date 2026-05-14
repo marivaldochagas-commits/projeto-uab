@@ -56,3 +56,8 @@ Para executar os testes, utilize o comando:
 ### Correções Realizadas
 1.  **Ativação do Ambiente:** Foi necessário ativar o `venv` para carregar o módulo Flask.
 2.  **Estrutura de Pastas:** O arquivo `login.html` foi movido para a pasta `/templates` para que o Jinja2 pudesse localizá-lo.
+## Registro de Testes - Aula 10 (Frontend)
+- **Teste de Responsividade:** Validado o carregamento do layout em resoluções de celular (Sucesso).
+- **Teste de Acessibilidade:** Verificação de contraste e foco em inputs (Sucesso).
+- **Validação de Formulários:** Mensagens de erro aparecem corretamente ao deixar campos vazios (Sucesso).
+- **Teste E2E:** Fluxo completo de login até a resposta do servidor (Sucesso).
