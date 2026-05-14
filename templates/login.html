@@ -1,14 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Login - Mercadinho</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Atendimento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .login-card { width: 100%; max-width: 400px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); background: white; }
+    </style>
 </head>
 <body>
-    <h2>Área de Login</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Usuário" required>
-        <input type="password" name="password" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="login-card">
+        <h3 class="text-center mb-4">Sistema de Atendimento</h3>
+        <form action="/" method="post">
+            <div class="mb-3">
+                <label for="usuario" class="form-label">E-mail ou Usuário</label>
+                <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Digite seu acesso" required>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" name="senha" class="form-control" id="senha" placeholder="Sua senha" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+        </form>
+        <div class="text-center mt-3">
+            <small class="text-muted">IFTO - Campus Araguatins</small>
+        </div>
+    </div>
 </body>
 </html>
