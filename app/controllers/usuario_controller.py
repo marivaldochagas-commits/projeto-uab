@@ -3,26 +3,28 @@ from app.database import db
 from app.models.usuario_model import UsuarioModel, UserRole
 from app.utils.auth_utils import requer_roles
 
-usuario_bp = Blueprint('usuario', __name__)
+# Aqui está o nome exato que o __init__.py precisa encontrar!
+usuario_blueprint = Blueprint('usuario', __name__)
 
-@usuario_bp.route("/admin/atendentes", methods=["POST"])
-@requer_roles(["ADMINISTRADOR", "PROPRIETARIO"])
-def criar_atendente():
-    data = request.json
-    email = data.get("email")
-    senha = data.get("senha")
+@usuario_blueprint.route("/admin/atendentes", methods=["POST"])
+@requer_roles(["ADMINISTRADOR"])
+def cadastrar_atendente():
+    dados = request.get_json() or request.form
+    email = dados.get("email")
+    senha = dados.get("senha")
     
     if not email or not senha:
-        return jsonify({"erro": "Email e senha são obrigatórios"}), 400
-        
-    novo = UsuarioModel(
+        return jsonify({"erro": "Dados incompletos"}), 400
+
+    # Cria o atendente associando-o ao Admin logado
+    novo_atendente = UsuarioModel(
         email=email,
         role=UserRole.ATENDENTE,
         criado_por_id=session.get("user_id")
     )
-    novo.set_senha(senha)
+    novo_atendente.set_senha(senha)
     
-    db.session.add(novo)
+    db.session.add(novo_atendente)
     db.session.commit()
     
-    return jsonify({"mensagem": "Atendente criado com sucesso"}), 201
+    return jsonify({"mensagem": "Atendente criado com sucesso vinculado à sua equipe"}), 201

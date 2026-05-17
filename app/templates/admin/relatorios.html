@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Relatórios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .sidebar { background-color: #212529; min-height: 100vh; color: white; }
+        .card-counter { border-left: 5px solid; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-lg-2 sidebar p-4">
+            <h4 class="text-primary fw-bold text-center mb-4">Zil Atendimento</h4>
+            <hr>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white bg-primary rounded px-3 py-2 active" href="#">📊 Dashboard</a>
+                </li>
+            </ul>
+            <hr class="mt-5">
+            <div class="text-center">
+                <a href="{{ url_for('pages.logout') }}" class="btn btn-outline-danger btn-sm w-100">🚪 Sair do Sistema</a>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-lg-10 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2>Painel de Controle</h2>
+                    <p class="text-muted">Bem-vindo! Aqui está o resumo das suas operações de atendimento.</p>
+                </div>
+                <span class="badge bg-success p-2 fw-semibold fs-6">Nível: {{ session.get('usuario_role') }}</span>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card card-counter border-primary shadow-sm p-3 bg-white">
+                        <div class="text-muted fw-bold small text-uppercase">Total de Chamados</div>
+                        <div class="fs-2 fw-bold text-dark">{{ dados.total }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-counter border-success shadow-sm p-3 bg-white">
+                        <div class="text-muted fw-bold small text-uppercase">Chamados Resolvidos</div>
+                        <div class="fs-2 fw-bold text-success">{{ dados.resolvidos }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-counter border-info shadow-sm p-3 bg-white">
+                        <div class="text-muted fw-bold small text-uppercase">Membros na Equipe</div>
+                        <div class="fs-2 fw-bold text-info">{{ dados.equipe }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0 bg-white p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold m-0 text-dark">Gerenciamento da Equipe</h5>
+                    <button class="btn btn-primary btn-sm fw-bold px-3" data-bs-toggle="modal" data-bs-target="#modalAtendente">+ Novo Atendente</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>E-mail Corporativo</th>
+                                <th>Cargo</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="text-muted">#--</span></td>
+                                <td><span class="text-muted">Nenhum atendente cadastrado ainda</span></td>
+                                <td><span class="badge bg-secondary">Aguardando dados</span></td>
+                                <td><span class="spinner-grow spinner-grow-sm text-warning" role="status"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAtendente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Cadastrar Novo Atendente</h5>
+                <button type="button" class="btn-close" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/atendentes" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">E-mail do Atendente</label>
+                        <input type="email" name="email" class="form-control" placeholder="atendente@empresa.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Senha Inicial</label>
+                        <input type="password" name="senha" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold mt-2">Salvar Colaborador</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
