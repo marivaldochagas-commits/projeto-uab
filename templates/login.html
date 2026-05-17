@@ -14,6 +14,8 @@
     <div class="login-card">
         <h3 class="text-center mb-4">Sistema de Atendimento</h3>
         <form action="/" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
             <div class="mb-3">
                 <label for="usuario" class="form-label">E-mail ou Usuário</label>
                 <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Digite seu acesso" required>

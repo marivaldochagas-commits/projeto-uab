@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, redirect
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
 # CONFIGURAÇÃO DA CHAVE SECRETA (Correção do Item 3)
 app.config['SECRET_KEY'] = 'uma_chave_criptografica_muito_segura_e_longa_123'
+# adicione esta linha exatamente aqui:
+csrf = CSRFProtect(app) 
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
