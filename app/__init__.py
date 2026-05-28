@@ -13,6 +13,10 @@ def create_app():
     from app.controllers.relatorio_controller import relatorio_blueprint
     from app.controllers.page_controller import page_blueprint
     
+# Adicione perto dos seus outros registros de blueprints:
+    from app.controllers.ticket_controller import ticket_blueprint
+    app.register_blueprint(ticket_blueprint)
+
     # Registra as Blueprints no app
     app.register_blueprint(usuario_blueprint)
     app.register_blueprint(relatorio_blueprint)

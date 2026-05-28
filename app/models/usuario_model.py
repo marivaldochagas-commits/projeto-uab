@@ -21,4 +21,10 @@ class UsuarioModel(db.Model):
         self.senha_hash = generate_password_hash(senha)
         
     def verificar_senha(self, senha):
-        return check_password_hash(self.senha_hash, senha)
+        # Garanta que todas as linhas abaixo tenham 8 espaços de recuo em relação ao início da margem
+        if not self.senha_hash or not isinstance(self.senha_hash, str):
+            return False
+        try:
+            return check_password_hash(self.senha_hash, senha)
+        except Exception:
+            return False
