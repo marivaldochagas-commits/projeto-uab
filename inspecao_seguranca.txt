@@ -1,0 +1,43 @@
+# Relatório de Inspeção de Cibersegurança - Zil App
+
+## 1. Resumo Executivo
+Inspeção focada em segurança de aplicação (App Flutter + Backend Flask).
+
+| Severidade | Contagem de Achados |
+| :--- | :--- |
+| Crítica | 1 |
+| Alta | 2 |
+| Média | 2 |
+| Baixa | 1 |
+
+### 5 Ações Mais Urgentes
+1. Remover `token` e credenciais expostas no código fonte (`main.dart`).
+2. Implementar `HTTPS` para comunicação entre App e Backend.
+3. Sanitizar inputs de texto (`descricao`, `titulo`) para prevenir injeções.
+4. Configurar `SECRET_KEY` em arquivo `.env` separado do código.
+5. Adicionar logs de erro no Backend para monitoramento de falhas (A09).
+
+## 2. Detalhamento de Vulnerabilidades
+
+### V-01: Exposição de Credenciais (A07: Authentication Failures)
+* **Localização:** `main.dart`, linha 16.
+* **Descrição:** O token de autenticação está exposto como uma constante de string no código.
+* **Evidência:** `final String token = "SEU_TOKEN_AQUI";`
+* **Impacto:** Credenciais expostas no repositório permitem acesso indevido à API.
+* **Severidade:** Crítica.
+* **Recomendação:** Utilizar `flutter_dotenv` e nunca versionar o arquivo `.env`.
+
+### V-02: Comunicação Não Criptografada (A02: Security Misconfiguration)
+* **Localização:** `main.dart`, linha 20 e 36.
+* **Descrição:** A API é acessada via `http://` (HTTP claro).
+* **Evidência:** `Uri.parse('http://10.0.2.2:5000/...')`
+* **Impacto:** Dados interceptáveis por ataques *Man-in-the-Middle*.
+* **Severidade:** Alta.
+* **Recomendação:** Configurar certificado SSL/TLS no servidor Flask.
+
+### V-03: Falta de Sanitização (A05: Injection)
+* **Localização:** `criarChamado()` em `main.dart`.
+* **Descrição:** Dados enviados sem validação prévia ao servidor.
+* **Impacto:** Possibilidade de XSS ou injeção de SQL via API.
+* **Severidade:** Alta.
+* **Recomendação:** Validar o tamanho e o conteúdo de `descricao` antes de enviar.
